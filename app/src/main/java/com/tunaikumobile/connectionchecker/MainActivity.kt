@@ -79,7 +79,11 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             val nwInfo = connectivityManager.activeNetworkInfo ?: return "No Connection"
-            return "No Connection"
+            return when (nwInfo.type) {
+                ConnectivityManager.TYPE_MOBILE -> "Cellular"
+                ConnectivityManager.TYPE_WIFI -> "Wifi"
+                else -> "No Connection"
+            }
         }
     }
 
